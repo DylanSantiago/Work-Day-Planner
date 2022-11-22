@@ -10,9 +10,12 @@ var plansBlock;
 var saveBtn;
 
 const planDay = () => {
-    $.each(time, function (array, time) {
+    $.each(timeSlot, function (array, time) {
         timeBlock = $("<section>");
         timeBlock.addClass("row");
+
+        hourBlock = $("<div>");
+        hourBlock.addClass("hour col-md-1");
 
     }
     
