@@ -9,13 +9,16 @@ var hourBlock;
 var plansBlock;
 var saveBtn;
 
-const planDay = () => {
+const buildPlanner = () => {
     $.each(timeSlot, function (array, time) {
         timeBlock = $("<section>");
         timeBlock.addClass("row");
 
         hourBlock = $("<div>");
         hourBlock.addClass("hour col-md-1");
+        hourBlock.css("text-align", "center");
+        hourBlock.css("font-size", "22px");
+        hourBlock.css("padding-top", "25px");
         hourBlock.text(time);
         timeBlock.append(hourBlock);
 
@@ -34,6 +37,32 @@ const planDay = () => {
     });
 };
 
-planDay();
+const stylePlanner = () => {
+    today.text(moment.format("dddd, MMMM Do, YYYY"));
 
+    $.each(militaryTime, function (array, time){
+        plansBlock = $("#" + militaryTime[array]);
 
+        if ((parseInt(plansBlock[0].id) < moment.hour())) {
+            plansBlock.addClass("past");
+
+        } else if ((parseInt(plansBlock[0].id) === moment.hour())) {
+            plansBlock.addClass("present");
+        
+        } else {
+            plansBlock.addClass("future");
+        };
+        
+        plansBlock = $("#" + militaryTime[array]);
+        plansBlock.text(localStorage.getItem("planLog" + militaryTime[array]));
+    });
+};
+
+const logPlans = (save) => {
+    save.preventDefault();
+    localStorage.setItem("planLog" + save.currentTarget.id, save.currentTarget.previousSibling.value);
+};
+
+buildPlanner();
+stylePlanner();
+$(".saveBtn").click(logPlans);
