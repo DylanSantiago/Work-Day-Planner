@@ -16,7 +16,24 @@ const planDay = () => {
 
         hourBlock = $("<div>");
         hourBlock.addClass("hour col-md-1");
+        hourBlock.text(time);
+        timeBlock.append(hourBlock);
 
-    }
-    
-    )}
+        plansBlock = $("<textarea>");
+        plansBlock.addClass("col-md-10");
+        plansBlock.attr("id", militaryTime[array]);
+        timeBlock.append(plansBlock);
+
+        saveBtn = $("<button>");
+        saveBtn.addClass("saveBtn fas fa-save col-md-1");
+        saveBtn.attr("id", militaryTime[array]);
+        timeBlock.append(saveBtn);
+
+        $(".container").append(timeBlock);
+
+    });
+};
+
+planDay();
+
+
